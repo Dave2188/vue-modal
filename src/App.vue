@@ -5,9 +5,32 @@
 		<Modal theme="sale" @close="toggleModal">
 			<h1>{{ this.header }}</h1>
 			<p>{{ this.text }}</p>
+			<template v-slot:links>
+				<a href="#">Sign up</a>
+				--
+				<a href="#">Log In</a>
+			</template>
 		</Modal>
 	</div>
+	<Modal v-if="showModalTwo" @close="toggleModalTwo" theme="sale">
+		<h1>Sign In</h1>
+		<p>Please fill out all fields</p>
+		<br />
+		<template v-slot:userData>
+			<fieldset>
+				<label for="userName">User Name</label>
+				<input type="text" name="userName" />
+			</fieldset>
+			<br />
+			<fieldset>
+				<label for="password">Password</label>
+				<input type="text" name="Password" />
+			</fieldset>
+		</template>
+	</Modal>
+
 	<button @click="toggleModal">Open Modal</button>
+	<button @click="toggleModalTwo">Open Modal</button>
 </template>
 
 <script>
@@ -22,11 +45,15 @@ export default {
 			header: "Sign up here for a chance to win!",
 			text: "Free Tickets!!!!",
 			showModal: false,
+			showModalTwo: false,
 		};
 	},
 	methods: {
 		toggleModal() {
 			this.showModal = !this.showModal;
+		},
+		toggleModalTwo() {
+			this.showModalTwo = !this.showModalTwo;
 		},
 	},
 };
@@ -54,5 +81,9 @@ h1 {
 
 .modal.sale h1 {
 	color: white;
+}
+
+button {
+	margin: 2rem;
 }
 </style>
